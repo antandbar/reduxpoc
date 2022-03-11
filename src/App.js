@@ -1,74 +1,45 @@
 import './App.css';
-import { createStore } from 'redux';
-import ReactDOM from 'react-dom';
 
-const actionIncremented = {
-  type: '@counter/incremented',
-};
+import { createNote, toggleImportanceOf } from './reducers/noteReducer';
+import { useDispatch, useSelector } from 'react-redux';
 
-const actionDecremented = {
-  type: '@counter/decremented',
-};
+const App = () => {
+  const state = useSelector(state =>state);
+  const dispatch = useDispatch();
 
-const actionReset = {
-  type: '@counter/reseted',
-};
+  const addNote = evt => {
+    evt.preventDefault();
+    const { target } = evt;
+    const content = target.note.value;
+    target.note.value = '';
+    dispatch(createNote(content));
+  };
 
-const noteReducer = (state=[], action) => {
-  switch (action.type) {
-    case '@note/created':
-      return state.concat(action.payload);
-/*     case '@counter/decremented':
-      return state - 1;
-    case '@counter/reseted':
-      return (state = 0); */
-    default:
-      return state;
-  }
-};
-
-const store = createStore(noteReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
-
-
-
-
-
-
-function App() {
+  const toggleImportant = id => {
+    dispatch(toggleImportanceOf(id));
+  };
   return (
-    <div className="App">
-      <div>
-      {store.getState()}
-      </div>
-      <button 
-        onClick={() => store.dispatch(actionIncremented)}
-        >
-          +  
-        </button>
-        <button 
-        onClick={() => store.dispatch(actionDecremented)}
-        >
-          -  
-        </button>
-        <button 
-        onClick={() => store.dispatch(actionReset)}
-        >
-          reset  
-        </button>
+    <div>
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button>add</button>
+      </form>
+
+      <ul>
+        {state.map(note => {
+          return (
+            <li key={note.id} onClick={() => toggleImportant(note.id)}>
+              {note.content}
+              <strong>
+                {' '}
+                {note.important ? 'important' : 'not important'}{' '}
+              </strong>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
-}
-
-/* const renderApp = () => {
-  ReactDOM.render(
-      <App />,
-    document.getElementById('root')
-  );
-}
-
-renderApp();
-store.subscribe(renderApp) */
+};
 
 export default App;
