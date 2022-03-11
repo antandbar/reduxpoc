@@ -14,20 +14,20 @@ const actionReset = {
   type: '@counter/reseted',
 };
 
-const counterReducer = (state=0, action) => {
+const noteReducer = (state=[], action) => {
   switch (action.type) {
-    case '@counter/incremented':
-      return state + 1;
-    case '@counter/decremented':
+    case '@note/created':
+      return state.concat(action.payload);
+/*     case '@counter/decremented':
       return state - 1;
     case '@counter/reseted':
-      return (state = 0);
+      return (state = 0); */
     default:
       return state;
   }
 };
 
-const store = createStore(counterReducer,
+const store = createStore(noteReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
@@ -61,7 +61,7 @@ function App() {
   );
 }
 
-const renderApp = () => {
+/* const renderApp = () => {
   ReactDOM.render(
       <App />,
     document.getElementById('root')
@@ -69,6 +69,6 @@ const renderApp = () => {
 }
 
 renderApp();
-store.subscribe(renderApp)
+store.subscribe(renderApp) */
 
 export default App;
