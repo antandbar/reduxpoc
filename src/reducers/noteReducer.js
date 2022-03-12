@@ -1,17 +1,7 @@
-const initialState = [
-  {
-    content: 'bienvenidos a la app',
-    important: true,
-    id:1
-  },
-  {
-    content: 'gracias por esta poc',
-    important: false,
-    id:2
-  }
-];
-export const noteReducer = (state = initialState, action) => {
+export const noteReducer = (state = [], action) => {
   switch (action.type) {
+    case '@note/init':
+      return action.payload;
     case '@note/created':
       return state.concat(action.payload);
     case '@note/toggle_important':
@@ -52,3 +42,10 @@ export const toggleImportanceOf = id => {
     },
   };
 };
+
+export const initNotes = notes => {
+  return {
+    type: '@note/init',
+    payload: notes
+  }
+}

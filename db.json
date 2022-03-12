@@ -1,0 +1,14 @@
+{
+    "notes": [
+        {
+            "content": "bienvenidos a la app",
+            "important": true,
+            "id":1
+          },
+          {
+            "content": "gracias por esta poc",
+            "important": false,
+            "id":2
+          }
+    ]
+}

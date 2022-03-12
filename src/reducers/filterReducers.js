@@ -6,7 +6,7 @@ export const filterReducer = (state = 'ALL', action) => {
             return state;
           }
           return state.filter(note => {
-           if (note.id === filter) {
+           if (note.important === filter) {
               return {
                 ...note
               };

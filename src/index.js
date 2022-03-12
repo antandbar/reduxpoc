@@ -3,20 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore, combineReducers } from 'redux';
-import { noteReducer } from './reducers/noteReducer';
-import { filterReducer } from './reducers/filterReducers';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
-});
-const store = createStore(
-  reducer,
-  composeWithDevTools()
-);
+import { store } from './store';
 
 ReactDOM.render(
   <Provider store={store}>
