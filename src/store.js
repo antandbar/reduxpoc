@@ -1,7 +1,8 @@
 import { noteReducer } from './reducers/noteReducer';
 import { filterReducer } from './reducers/filterReducers';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 
 
