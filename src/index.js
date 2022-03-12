@@ -3,28 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux';
-import {  noteReducer } from './reducers/noteReducer';
+import { createStore, combineReducers } from 'redux';
+import { noteReducer } from './reducers/noteReducer';
+import { filterReducer } from './reducers/filterReducers';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
+const reducer = combineReducers({
+  notes: noteReducer,
+  filter: filterReducer,
+});
 const store = createStore(
-  noteReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  reducer,
+  composeWithDevTools()
 );
 
-
-
-  ReactDOM.render(
-    <Provider store={store}>
+ReactDOM.render(
+  <Provider store={store}>
     <React.StrictMode>
-      <App/>
-    </React.StrictMode>,
-    </Provider>,
-    document.getElementById('root'),
-  );
-
-
-
+      <App />
+    </React.StrictMode>
+    ,
+  </Provider>,
+  document.getElementById('root'),
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

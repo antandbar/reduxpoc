@@ -11,7 +11,7 @@ function Note({ toggleImportant, note }) {
 }
 
 export default function NotesContainer() {
-  const notes = useSelector(state => state);
+  const notes = useSelector(state => state.notes);
   const dispatch = useDispatch();
 
   const toggleImportant = id => {
