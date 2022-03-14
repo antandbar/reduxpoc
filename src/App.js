@@ -1,25 +1,27 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+/* import { useEffect } from 'react';
+import { useDispatch } from 'react-redux'; */
+import { Routes, Route} from 'react-router-dom';
 import './App.css';
-import Filter from './components/Filter';
-import NewNote from './components/NewNote';
 import Notes from './components/Notes';
-import { getAll } from './services/notes';
-import { initNotes } from './reducers/noteReducer';
+import NoteComponent from './components/NoteComponent';
+/* import { getAll } from './services/notes'; */
+/* import { initNotes } from './reducers/noteReducer'; */
 
 const App = () => {
-  const dispatch = useDispatch();
+/*   const dispatch = useDispatch();
   useEffect(() => {
     getAll().then(notes => {
       dispatch(initNotes(notes));
     });
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <div>
-      <NewNote />
-      <Filter />
-      <Notes />
+      <Routes>
+        <Route path="/" element={<NoteComponent />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/notescomponent" element={<NoteComponent />} />
+      </Routes>
     </div>
   );
 };
